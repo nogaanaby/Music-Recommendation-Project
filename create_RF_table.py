@@ -6,7 +6,6 @@ artist_tags = pd.read_csv("datasets/processed_tables/artist_tags_pca.csv", index
 user_preference_matrix = pd.read_csv("datasets/processed_tables/user_preference_pca.csv", index_col=0)
 artists = pd.read_csv("datasets/small_DTS/artists_small.csv", index_col=0)
 users=pd.read_csv("datasets/small_DTS/active_500_users.csv", index_col=0)
-train_artists = artists.index[:100]
 
 output_file = "datasets/processed_tables/user_artist_RF_table.csv"
 file_exists = False
@@ -45,7 +44,7 @@ for user in users.index:
     rows_to_append = []
 
     for artist in his_artists:
-        if artist in train_artists:
+        if artist in artists.index:
             try:
                 user_artist = current_user_data[current_user_data["artist_id"] == artist]
                 like = user_artist["like"].values[0]
