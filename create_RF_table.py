@@ -12,14 +12,12 @@ file_exists = False
 last_user = user_like_artist.index[0]
 
 if not os.path.exists(output_file):
-    # Create an empty DataFrame with the desired columns
     empty_df = pd.DataFrame(columns=["user_id", "artist_id", "liked"] +
                                      user_preference_matrix.columns.tolist() +
                                      artist_tags.columns.tolist())
     empty_df.to_csv(output_file, index=False)
     file_exists = True
 else:
-    # Open the file and retrieve the last user
     try:
         existing_df = pd.read_csv(output_file)
         if not existing_df.empty:

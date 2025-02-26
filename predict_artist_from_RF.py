@@ -1,18 +1,14 @@
 import pandas as pd
 import joblib
 
-# Load the saved model
 model_filename = "RF_data/artist_recommendation_model.joblib"
 loaded_model = joblib.load(model_filename)
 
-# Load the original data (for artist list and user data)
 df = pd.read_csv("datasets/processed_tables/user_artist_RF_table.csv")
 
-# Replace with the user ID you want to predict for
 user_id_to_predict = "0018a5a87b5e26fcaee71d2565be7f44930908f4"
 artists_list = pd.read_csv("datasets/small_DTS/artists_small.csv")
 
-# Get the user's data
 try:
     user_data = df[df["user_id"] == user_id_to_predict].iloc[0].drop(["user_id", "artist_id", "liked"])
     user_data_df = user_data.to_frame().T
@@ -21,7 +17,6 @@ except IndexError:
     print(f"User '{user_id_to_predict}' not found.")
     exit()
 
-# Iterate over all artists and make predictions
 for artist_id in df["artist_id"].unique():
     try:
         line_data = df[df["artist_id"] == artist_id].iloc[0].drop(["user_id", "artist_id", "liked"])

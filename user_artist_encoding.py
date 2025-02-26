@@ -18,8 +18,5 @@ df_artist["normalized_play_count"] = df_artist["play_count"] / df_artist["total_
 # Pivot the table to get user-artist matrix
 user_artist_matrix = df_artist.pivot(index="user_id", columns="artist_id", values="normalized_play_count").fillna(0)
 
-# Save the result to a CSV file
 user_artist_matrix.to_csv("new_small_DTS/user_artist_encoded.csv")
-
-# Print sample output
 print(user_artist_matrix.head())

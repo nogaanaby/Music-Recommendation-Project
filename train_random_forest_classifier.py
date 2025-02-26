@@ -4,10 +4,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 import joblib
 
-# Load the data
 df = pd.read_csv("datasets/processed_tables/user_artist_RF_table.csv")
 
-# Separate features (X) and target (y)
 X = df.drop(["user_id", "artist_id", "liked"], axis=1)  # Drop non-feature columns
 y = df["liked"]
 
@@ -24,13 +22,11 @@ joblib.dump(rf_classifier, model_filename)
 print(f"Model saved to {model_filename}")
 
 
-# Evaluate the model on the test set
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy}")
 
 print("Classification Report:")
 print(classification_report(y_test, y_pred))
 
-# Save the split data to CSV files
 X_test.to_csv("RF_data/X_test.csv", index=False)
 y_test.to_csv("RF_data/y_test.csv", index=False)
